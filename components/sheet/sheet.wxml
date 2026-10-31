@@ -1,0 +1,13 @@
+<view wx:if="{{show}}" class="sheet-root" catchtouchmove="noop" bindtap="onMask">
+  <view class="sheet-panel" catchtap="noop">
+    <view class="sheet-head">
+      <text class="sheet-title">{{title}}</text>
+      <view wx:if="{{closable}}" class="sheet-close" bindtap="onClose" hover-class="sheet-close-hover">
+        <text class="sheet-close-icon">✕</text>
+      </view>
+    </view>
+    <view class="sheet-body">
+      <slot></slot>
+    </view>
+  </view>
+</view>

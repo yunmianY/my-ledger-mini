@@ -1,0 +1,16 @@
+<view class="txn" bindtap="onTap" bindlongpress="onLong" hover-class="txn-hover" hover-stay-time="60">
+  <view class="txn-emoji-wrap">
+    <app-icon icon-key="{{item.iconKey}}" path="{{item.iconPath}}" emoji="{{item.emoji}}" size="{{44}}" />
+  </view>
+  <view class="txn-main">
+    <view class="txn-row">
+      <text class="txn-name" overflow="ellipsis" max-lines="1">{{item.name}}</text>
+      <text class="txn-amount {{item.income ? 'txn-income' : 'txn-expense'}}">{{item.amountText}}</text>
+    </view>
+    <view class="txn-row">
+      <text wx:if="{{item.time}}" class="txn-time">{{item.time}}</text>
+      <text class="txn-note" overflow="ellipsis" max-lines="1">{{item.note}}</text>
+      <text wx:if="{{item.member}}" class="txn-member">{{item.member}}</text>
+    </view>
+  </view>
+</view>

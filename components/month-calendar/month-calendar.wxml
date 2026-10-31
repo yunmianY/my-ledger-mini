@@ -1,0 +1,20 @@
+<view class="cal">
+  <view class="cal-week">
+    <text wx:for="{{weekdays}}" wx:key="*this" class="cal-week-item">{{item}}</text>
+  </view>
+
+  <view class="cal-grid">
+    <view
+      wx:for="{{cells}}"
+      wx:key="key"
+      class="cal-cell {{item.levelClass}} {{item.selected ? 'cal-selected' : ''}}"
+      data-date="{{item.date}}"
+      bindtap="onTap"
+      hover-class="cal-hover"
+      hover-stay-time="60"
+    >
+      <text class="cal-day {{item.isToday ? 'cal-today' : ''}} {{item.empty ? 'cal-day-empty' : ''}}">{{item.empty ? '' : item.day}}</text>
+      <text wx:if="{{item.amountText}}" class="cal-amount">{{item.amountText}}</text>
+    </view>
+  </view>
+</view>

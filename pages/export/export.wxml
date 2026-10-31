@@ -1,0 +1,191 @@
+<view class="page">
+  <page-bg />
+
+  <view class="page-body">
+    <navigation-bar title="导出备份" back="{{true}}" color="#1A1A1A" background="transparent"></navigation-bar>
+
+    <view class="page-main">
+      <scroll-view class="scroller" type="list" scroll-y>
+        <view class="card">
+          <view class="info-row">
+            <text class="info-label">当前账本</text>
+            <text class="info-value">{{bookName}}</text>
+          </view>
+          <view class="info-row">
+            <text class="info-label">符合条件</text>
+            <text class="info-value">{{countText}}</text>
+          </view>
+          <view class="info-row">
+            <text class="info-label">日期跨度</text>
+            <text class="info-value">{{rangeText}}</text>
+          </view>
+        </view>
+
+        <view class="section-title">导出范围</view>
+        <view class="card">
+          <view class="opt-row">
+            <text class="opt-label">账本</text>
+            <view class="opt-group">
+              <view class="opt {{scope === 'book' ? 'opt-on' : ''}}" data-scope="book" bindtap="onScope">
+                <text class="opt-text {{scope === 'book' ? 'opt-text-on' : ''}}">当前账本</text>
+              </view>
+              <view class="opt {{scope === 'all' ? 'opt-on' : ''}}" data-scope="all" bindtap="onScope">
+                <text class="opt-text {{scope === 'all' ? 'opt-text-on' : ''}}">全部账本</text>
+              </view>
+            </view>
+          </view>
+
+          <view class="opt-row" bindtap="openFrom" hover-class="tap-hover">
+            <text class="opt-label">开始日期</text>
+            <view class="opt-value">
+              <text class="opt-value-text">{{fromText}}</text>
+              <text class="opt-arrow">›</text>
+            </view>
+          </view>
+
+          <view class="opt-row" bindtap="openTo" hover-class="tap-hover">
+            <text class="opt-label">结束日期</text>
+            <view class="opt-value">
+              <text class="opt-value-text">{{toText}}</text>
+              <text class="opt-arrow">›</text>
+            </view>
+          </view>
+
+          <view class="opt-row opt-row-last" bindtap="openCats" hover-class="tap-hover">
+            <text class="opt-label">分类</text>
+            <view class="opt-value">
+              <text class="opt-value-text">{{catLabel}}</text>
+              <text class="opt-arrow">›</text>
+            </view>
+          </view>
+        </view>
+
+        <view class="section-title">导出</view>
+        <view class="card">
+          <view class="action" bindtap="exportCsv" hover-class="tap-hover">
+            <view class="action-main">
+              <text class="action-title">CSV 表格</text>
+              <text class="action-sub">通用格式，共 {{countText}}{{scope === 'all' ? '，多账本按时间合并' : ''}}</text>
+            </view>
+            <text class="action-arrow">›</text>
+          </view>
+          <view class="action" bindtap="exportTsv" hover-class="tap-hover">
+            <view class="action-main">
+              <text class="action-title">TSV 表格</text>
+              <text class="action-sub">Excel 双击直接打开，不用选分隔符</text>
+            </view>
+            <text class="action-arrow">›</text>
+          </view>
+          <view class="action" bindtap="exportMarkdown" hover-class="tap-hover">
+            <view class="action-main">
+              <text class="action-title">Markdown 表格</text>
+              <text class="action-sub">可以贴进笔记、Notion、语雀</text>
+            </view>
+            <text class="action-arrow">›</text>
+          </view>
+          <view class="action" bindtap="exportText" hover-class="tap-hover">
+            <view class="action-main">
+              <text class="action-title">纯文本</text>
+              <text class="action-sub">一行一笔，适合直接发给别人看</text>
+            </view>
+            <text class="action-arrow">›</text>
+          </view>
+          <view class="action action-last" bindtap="exportJson" hover-class="tap-hover">
+            <view class="action-main">
+              <text class="action-title">JSON 备份</text>
+              <text class="action-sub">全量备份，不受上面的筛选影响</text>
+            </view>
+            <text class="action-arrow">›</text>
+          </view>
+        </view>
+
+        <view class="section-title">导入</view>
+        <view class="card">
+          <text class="paste-label">粘贴 JSON 备份或 CSV 表格</text>
+          <textarea
+            class="paste-area"
+            value="{{importText}}"
+            placeholder="自动识别格式"
+            placeholder-class="placeholder"
+            maxlength="-1"
+            bindinput="onImportInput"
+          />
+          <view class="btn btn-primary import-btn" bindtap="onImport" hover-class="btn-hover">
+            <text>导入</text>
+          </view>
+          <text class="import-hint">JSON 会问你要合并还是覆盖；CSV 自动去重，只追加没有的记录</text>
+        </view>
+
+        <view class="section-title">危险操作</view>
+        <view class="card">
+          <view class="action action-last" bindtap="clearAll" hover-class="tap-hover">
+            <view class="action-main">
+              <text class="action-title action-danger">清空全部数据</text>
+              <text class="action-sub">删除所有账本与记录，不可恢复</text>
+            </view>
+            <text class="action-arrow">›</text>
+          </view>
+        </view>
+
+        <text class="tip">CSV 用于查看和分析，可以按范围筛选；JSON 是完整备份，用于恢复数据。数据只存在这台设备的微信本地存储里，建议每月导出一次。</text>
+
+        <view class="bottom-space"></view>
+      </scroll-view>
+    </view>
+  </view>
+
+  <sheet show="{{showFrom}}" title="开始日期" bind:close="closeFrom">
+    <calendar-panel value="{{from}}" bind:select="onFromSelect" />
+    <view class="date-clear" bindtap="clearFrom" hover-class="tap-hover">
+      <text class="date-clear-text">不限日期</text>
+    </view>
+  </sheet>
+
+  <sheet show="{{showTo}}" title="结束日期" bind:close="closeTo">
+    <calendar-panel value="{{to}}" bind:select="onToSelect" />
+    <view class="date-clear" bindtap="clearTo" hover-class="tap-hover">
+      <text class="date-clear-text">不限日期</text>
+    </view>
+  </sheet>
+
+  <sheet show="{{showCats}}" title="选择分类" bind:close="closeCats">
+    <view class="cat-group">
+      <text class="cat-group-title">支出</text>
+      <view class="cat-chips">
+        <view
+          wx:for="{{expenseCats}}"
+          wx:key="name"
+          class="cat-chip {{item.checked ? 'cat-chip-on' : ''}}"
+          data-name="{{item.name}}"
+          bindtap="toggleCat"
+        >
+          <text class="cat-chip-text {{item.checked ? 'cat-chip-text-on' : ''}}">{{item.name}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="cat-group">
+      <text class="cat-group-title">收入</text>
+      <view class="cat-chips">
+        <view
+          wx:for="{{incomeCats}}"
+          wx:key="name"
+          class="cat-chip {{item.checked ? 'cat-chip-on' : ''}}"
+          data-name="{{item.name}}"
+          bindtap="toggleCat"
+        >
+          <text class="cat-chip-text {{item.checked ? 'cat-chip-text-on' : ''}}">{{item.name}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="cat-actions">
+      <view class="btn btn-ghost cat-btn" bindtap="clearCats" hover-class="btn-hover">
+        <text>清空</text>
+      </view>
+      <view class="btn btn-primary cat-btn cat-btn-last" bindtap="confirmCats" hover-class="btn-hover">
+        <text>确定</text>
+      </view>
+    </view>
+  </sheet>
+</view>

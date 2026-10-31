@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "page-bg": "/components/page-bg/page-bg",
+    "app-icon": "/components/app-icon/app-icon",
+    "navigation-bar": "/components/navigation-bar/navigation-bar",
+    "app-tabbar": "/components/app-tabbar/app-tabbar",
+    "sheet": "/components/sheet/sheet"
+  }
+}

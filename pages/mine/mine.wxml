@@ -1,0 +1,139 @@
+<view class="page">
+  <page-bg />
+
+  <view class="page-body" bindtouchstart="onSwipeStart" bindtouchend="onSwipeEnd">
+    <navigation-bar title="我的" back="{{false}}" color="#1A1A1A" background="transparent"></navigation-bar>
+
+  <view class="page-main">
+    <scroll-view class="scroller" type="list" scroll-y>
+      <view class="book-card" bindtap="goBooks" hover-class="tap-hover">
+        <view class="book-left">
+          <app-icon class="book-icon-gap" icon-key="{{bookIconKey}}" path="{{bookIconPath}}" emoji="{{bookEmoji}}" size="{{60}}" />
+          <view class="book-info">
+            <text class="book-name">{{bookName}}</text>
+            <text class="book-sub">当前账本</text>
+          </view>
+        </view>
+        <text class="book-arrow">切换 ›</text>
+      </view>
+
+      <view class="stat-row">
+        <view class="stat-item">
+          <text class="stat-value">{{txnCount}}</text>
+          <text class="stat-label">笔记录</text>
+        </view>
+        <view class="stat-item">
+          <text class="stat-value">{{bookCount}}</text>
+          <text class="stat-label">个账本</text>
+        </view>
+        <view class="stat-item stat-item-last">
+          <text class="stat-value stat-small">{{storageText}}</text>
+          <text class="stat-label">本地占用</text>
+        </view>
+      </view>
+
+      <view class="card menu">
+        <view class="row" bindtap="goCategories" hover-class="tap-hover">
+          <view class="row-left">
+            <view class="row-icon">
+              <app-icon icon-key="menuCategories" emoji="🏷️" size="{{36}}" />
+            </view>
+            <text class="row-label">分类管理</text>
+          </view>
+          <view class="row-value">
+            <text class="row-arrow">›</text>
+          </view>
+        </view>
+        <view class="row" bindtap="goBudget" hover-class="tap-hover">
+          <view class="row-left">
+            <view class="row-icon">
+              <app-icon icon-key="menuBudget" emoji="🎯" size="{{36}}" />
+            </view>
+            <text class="row-label">预算设置</text>
+          </view>
+          <view class="row-value">
+            <text class="row-arrow">›</text>
+          </view>
+        </view>
+        <view class="row" bindtap="openMembers" hover-class="tap-hover">
+          <view class="row-left">
+            <view class="row-icon">
+              <app-icon icon-key="menuMembers" emoji="👥" size="{{36}}" />
+            </view>
+            <text class="row-label">记账人</text>
+          </view>
+          <view class="row-value">
+            <text class="row-value-text">{{members.length}} 人</text>
+            <text class="row-arrow">›</text>
+          </view>
+        </view>
+        <view class="row" bindtap="goAppearance" hover-class="tap-hover">
+          <view class="row-left">
+            <view class="row-icon">
+              <app-icon icon-key="menuAppearance" emoji="🎨" size="{{36}}" />
+            </view>
+            <text class="row-label">外观与背景</text>
+          </view>
+          <view class="row-value">
+            <text class="row-arrow">›</text>
+          </view>
+        </view>
+        <view class="row row-last" bindtap="goExport" hover-class="tap-hover">
+          <view class="row-left">
+            <view class="row-icon">
+              <app-icon icon-key="menuExport" emoji="💾" size="{{36}}" />
+            </view>
+            <text class="row-label">导出备份</text>
+          </view>
+          <view class="row-value">
+            <text class="row-arrow">›</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="hint">数据只存在这台设备上，换手机前记得先导出。</view>
+
+      <view class="card menu">
+        <view class="row row-last" bindtap="showAbout" hover-class="tap-hover">
+          <view class="row-left">
+            <view class="row-icon">
+              <app-icon icon-key="menuAbout" emoji="ℹ️" size="{{36}}" />
+            </view>
+            <text class="row-label">关于</text>
+          </view>
+          <view class="row-value">
+            <text class="row-value-text">v{{version}}</text>
+            <text class="row-arrow">›</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="bottom-space"></view>
+    </scroll-view>
+  </view>
+
+    <app-tabbar current="mine" />
+  </view>
+
+  <sheet show="{{showMember}}" title="记账人" bind:close="closeMembers">
+    <view wx:for="{{members}}" wx:key="*this" class="member-row">
+      <text class="member-name">{{item}}</text>
+      <view class="member-del" data-name="{{item}}" bindtap="onRemoveMember" hover-class="tap-hover">
+        <text class="member-del-text">移除</text>
+      </view>
+    </view>
+    <view class="add-row">
+      <input
+        class="add-input"
+        value="{{newMember}}"
+        placeholder="新成员名字"
+        placeholder-class="placeholder"
+        maxlength="10"
+        bindinput="onMemberInput"
+      />
+      <view class="add-btn" bindtap="onAddMember" hover-class="tap-hover">
+        <text class="add-btn-text">添加</text>
+      </view>
+    </view>
+  </sheet>
+</view>

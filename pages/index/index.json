@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "page-bg": "/components/page-bg/page-bg",
+    "navigation-bar": "/components/navigation-bar/navigation-bar",
+    "app-tabbar": "/components/app-tabbar/app-tabbar",
+    "txn-item": "/components/txn-item/txn-item",
+    "empty-state": "/components/empty-state/empty-state"
+  }
+}

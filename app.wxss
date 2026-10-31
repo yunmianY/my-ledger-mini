@@ -1,0 +1,236 @@
+/**app.wxss**/
+page {
+  height: 100vh;
+  background: #f7f7f5;
+  color: #1a1a1a;
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', 'Microsoft YaHei', sans-serif;
+  font-size: 28rpx;
+  line-height: 1.4;
+  --c-bg: #f7f7f5;
+  --c-card: #ffffff;
+  --c-text: #1a1a1a;
+  --c-sub: #8a8a8a;
+  --c-line: rgba(0, 0, 0, 0.06);
+  --c-expense: #e4572e;
+  --c-income: #2a9d8f;
+  --c-accent: #f4a261;
+  --c-danger: #d64545;
+  --radius-card: 24rpx;
+}
+
+/* 页面骨架：导航栏 / 内容 / tabbar 纵向排列
+   注意：这里不能加 overflow: hidden —— 弹层用 position: fixed 覆盖全屏，
+   祖先的裁剪会把它一起裁掉。 */
+.page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background: #f7f7f5;
+}
+
+/* 内容层：盖在 page-bg 之上。
+   z-index 给足，同时 position: relative 让它在 DOM 顺序里天然晚于背景层，
+   两层保险，避免背景图把文字盖住。 */
+.page-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 10;
+  min-height: 0;
+}
+
+.page-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  min-height: 0;
+}
+
+.scroller {
+  flex: 1;
+  min-height: 0;
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 24rpx;
+  margin: 0 24rpx 20rpx;
+  padding: 28rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+}
+
+.section-title {
+  font-size: 24rpx;
+  color: #8a8a8a;
+  margin: 28rpx 32rpx 12rpx;
+}
+
+.muted {
+  color: #8a8a8a;
+}
+
+.tap-hover {
+  opacity: 0.6;
+}
+
+/* 通用行 */
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 28rpx 0;
+  border-bottom: 1rpx solid rgba(0, 0, 0, 0.05);
+}
+
+.row-last {
+  border-bottom: 0;
+}
+
+.row-label {
+  font-size: 30rpx;
+  color: #1a1a1a;
+}
+
+.row-value {
+  font-size: 28rpx;
+  color: #8a8a8a;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.row-arrow {
+  font-size: 28rpx;
+  color: #c0c0c0;
+  margin-left: 8rpx;
+}
+
+.row-emoji {
+  font-size: 34rpx;
+  margin-right: 16rpx;
+}
+
+/* 按钮 */
+.btn {
+  height: 88rpx;
+  border-radius: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30rpx;
+  font-weight: 600;
+}
+
+.btn-primary {
+  background: #e4572e;
+  color: #ffffff;
+}
+
+.btn-ghost {
+  background: #ffffff;
+  color: #1a1a1a;
+  border: 1rpx solid rgba(0, 0, 0, 0.08);
+}
+
+.btn-danger {
+  background: #fdecea;
+  color: #d64545;
+}
+
+.btn-hover {
+  opacity: 0.75;
+}
+
+/* 标签 */
+.chips {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 0 24rpx 16rpx;
+}
+
+.chip {
+  padding: 8rpx 24rpx;
+  border-radius: 999rpx;
+  background: #ffffff;
+  margin: 8rpx 12rpx 0 0;
+}
+
+.chip-on {
+  background: #fdeee8;
+}
+
+.chip-text {
+  font-size: 24rpx;
+  color: #8a8a8a;
+}
+
+.chip-text-on {
+  color: #e4572e;
+  font-weight: 600;
+}
+
+/* 悬浮按钮 */
+.fab {
+  position: absolute;
+  right: 36rpx;
+  bottom: 48rpx;
+  width: 104rpx;
+  height: 104rpx;
+  border-radius: 52rpx;
+  background: #e4572e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8rpx 24rpx rgba(228, 87, 46, 0.32);
+  z-index: 20;
+}
+
+.fab-hover {
+  opacity: 0.8;
+}
+
+.fab-plus {
+  font-size: 52rpx;
+  color: #ffffff;
+  line-height: 52rpx;
+  margin-top: -4rpx;
+}
+
+.bottom-space {
+  height: 180rpx;
+}
+
+/* 输入 */
+.field {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24rpx 0;
+  border-bottom: 1rpx solid rgba(0, 0, 0, 0.05);
+}
+
+.field-label {
+  font-size: 28rpx;
+  color: #8a8a8a;
+  flex: none;
+  width: 140rpx;
+}
+
+.field-input {
+  flex: 1;
+  font-size: 30rpx;
+  color: #1a1a1a;
+  text-align: right;
+}
+
+.placeholder {
+  color: #c0c0c0;
+}

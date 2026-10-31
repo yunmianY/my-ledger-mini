@@ -1,0 +1,188 @@
+<view class="page">
+  <page-bg />
+
+  <view class="page-body" bindtouchstart="onSwipeStart" bindtouchend="onSwipeEnd">
+    <navigation-bar title="购物清单" back="{{false}}" color="#1A1A1A" background="transparent"></navigation-bar>
+
+    <view class="page-main">
+      <scroll-view class="scroller" type="list" scroll-y>
+        <view class="progress-card">
+          <view class="progress-top">
+            <view class="progress-left">
+              <text class="progress-label">还想买</text>
+              <view class="progress-amount-row">
+                <text class="progress-amount">¥{{pendingTotalText}}</text>
+                <text class="progress-count">{{pendingCount}} 件</text>
+              </view>
+            </view>
+            <view class="progress-right" bindtap="editMonthly" hover-class="tap-hover">
+              <text class="progress-monthly">{{monthlyText}}</text>
+              <text class="progress-edit">设置 ›</text>
+            </view>
+          </view>
+
+          <view class="progress-track">
+            <view class="progress-fill" style="width: {{progressPercent}}%"></view>
+          </view>
+
+          <view class="progress-foot">
+            <text class="progress-text">{{progressText}}</text>
+            <text class="progress-bought">已买 ¥{{boughtTotalText}}</text>
+          </view>
+        </view>
+
+        <view wx:if="{{tags.length > 0}}" class="chips">
+          <view class="chip {{activeTag === '' ? 'chip-on' : ''}}" data-tag="" bindtap="onTag">
+            <text class="chip-text {{activeTag === '' ? 'chip-text-on' : ''}}">全部</text>
+          </view>
+          <view
+            wx:for="{{tags}}"
+            wx:key="*this"
+            class="chip {{activeTag === item ? 'chip-on' : ''}}"
+            data-tag="{{item}}"
+            bindtap="onTag"
+          >
+            <text class="chip-text {{activeTag === item ? 'chip-text-on' : ''}}">{{item}}</text>
+          </view>
+        </view>
+
+        <view wx:if="{{pending.length > 0}}" class="section-title">待买</view>
+        <view wx:if="{{pending.length > 0}}" class="list">
+          <view wx:for="{{pending}}" wx:key="id" class="item" data-id="{{item.id}}" bindlongpress="onMore">
+            <view class="check" data-id="{{item.id}}" catchtap="onToggle" hover-class="tap-hover">
+              <text class="check-mark"></text>
+            </view>
+            <image wx:if="{{item.imagePath}}" class="thumb" src="{{item.imagePath}}" mode="aspectFill" />
+            <view wx:else class="thumb thumb-empty">
+              <text class="thumb-emoji">🛍️</text>
+            </view>
+            <view class="item-main">
+              <view class="item-line">
+                <text class="item-name" overflow="ellipsis" max-lines="1">{{item.name}}</text>
+                <text class="item-price">{{item.priceText}}</text>
+              </view>
+              <view class="item-line">
+                <text class="item-priority" style="color: {{item.priorityColor}}">{{item.priorityLabel}}</text>
+                <text wx:if="{{item.tag}}" class="item-tag">{{item.tag}}</text>
+                <text wx:if="{{item.note}}" class="item-note" overflow="ellipsis" max-lines="1">{{item.note}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+
+        <empty-state
+          wx:if="{{pending.length === 0 && bought.length === 0}}"
+          emoji="🛍️"
+          text="{{activeTag ? '这个分类下还没有东西' : '清单还是空的'}}"
+          hint="{{activeTag ? '' : '点右下角 + ，把想买但暂时不舍得买的东西放进来'}}"
+        />
+
+        <view wx:if="{{bought.length > 0}}" class="section-title">已买到 · {{bought.length}} 件</view>
+        <view wx:if="{{bought.length > 0}}" class="list">
+          <view wx:for="{{bought}}" wx:key="id" class="item" data-id="{{item.id}}" bindlongpress="onMore">
+            <view class="check check-on" data-id="{{item.id}}" catchtap="onToggle" hover-class="tap-hover">
+              <text class="check-mark check-mark-on">✓</text>
+            </view>
+            <image wx:if="{{item.imagePath}}" class="thumb" src="{{item.imagePath}}" mode="aspectFill" />
+            <view wx:else class="thumb thumb-empty">
+              <text class="thumb-emoji">🛍️</text>
+            </view>
+            <view class="item-main">
+              <view class="item-line">
+                <text class="item-name item-name-done" overflow="ellipsis" max-lines="1">{{item.name}}</text>
+                <text class="item-price item-price-done">{{item.priceText}}</text>
+              </view>
+              <view class="item-line">
+                <text class="item-priority" style="color: {{item.priorityColor}}">{{item.priorityLabel}}</text>
+                <text wx:if="{{item.tag}}" class="item-tag">{{item.tag}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+
+        <text class="tip">点左边的圆圈标记已买到，长按一条可以编辑或删除。清单只做备忘，不会自动改账本。</text>
+
+        <view class="bottom-space"></view>
+      </scroll-view>
+
+      <view class="fab" bindtap="openAdd" hover-class="fab-hover" hover-stay-time="60">
+        <text class="fab-plus">+</text>
+      </view>
+    </view>
+
+    <app-tabbar current="wishlist" />
+  </view>
+
+  <sheet show="{{showForm}}" title="{{formTitle}}" bind:close="closeForm">
+    <view class="form-tip">想买什么</view>
+    <input
+      class="form-input"
+      value="{{formName}}"
+      placeholder="例如：机械键盘、相机"
+      placeholder-class="placeholder"
+      maxlength="30"
+      bindinput="onName"
+    />
+
+    <view class="form-tip">大概多少钱（可留空）</view>
+    <input
+      class="form-input"
+      type="digit"
+      value="{{formPrice}}"
+      placeholder="0.00"
+      placeholder-class="placeholder"
+      bindinput="onPrice"
+    />
+
+    <view class="form-tip">图片（可留空）</view>
+    <view class="img-row">
+      <image wx:if="{{formImage}}" class="form-thumb" src="{{formImage}}" mode="aspectFill" bindtap="onPickImage" />
+      <view wx:else class="form-thumb form-thumb-empty" bindtap="onPickImage" hover-class="tap-hover">
+        <text class="form-thumb-plus">+</text>
+      </view>
+      <view wx:if="{{formImage}}" class="img-clear" bindtap="onClearImage" hover-class="tap-hover">
+        <text class="img-clear-text">删除图片</text>
+      </view>
+    </view>
+
+    <view class="form-tip">想要的程度</view>
+    <view class="opt-row">
+      <view
+        wx:for="{{priorities}}"
+        wx:key="value"
+        class="opt {{item.value === formPriority ? 'opt-on' : ''}}"
+        data-value="{{item.value}}"
+        bindtap="onPriority"
+      >
+        <text class="opt-text {{item.value === formPriority ? 'opt-text-on' : ''}}">{{item.label}}</text>
+      </view>
+    </view>
+
+    <view class="form-tip">分类（可选）</view>
+    <view class="opt-row">
+      <view
+        wx:for="{{tagOptions}}"
+        wx:key="*this"
+        class="opt {{item === formTag ? 'opt-on' : ''}}"
+        data-tag="{{item}}"
+        bindtap="onTagPick"
+      >
+        <text class="opt-text {{item === formTag ? 'opt-text-on' : ''}}">{{item}}</text>
+      </view>
+    </view>
+
+    <view class="form-tip">备注（可留空）</view>
+    <input
+      class="form-input"
+      value="{{formNote}}"
+      placeholder="型号、为什么想要"
+      placeholder-class="placeholder"
+      maxlength="60"
+      bindinput="onNote"
+    />
+
+    <view class="btn btn-primary form-btn" bindtap="onSubmit" hover-class="btn-hover">
+      <text>保存</text>
+    </view>
+  </sheet>
+</view>

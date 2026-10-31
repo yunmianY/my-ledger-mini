@@ -1,0 +1,23 @@
+<view class="kb">
+  <view class="kb-keys">
+    <view
+      wx:for="{{keys}}"
+      wx:key="*this"
+      class="key"
+      data-key="{{item}}"
+      bindtap="onKey"
+      hover-class="key-hover"
+      hover-stay-time="60"
+    >
+      <text class="key-text">{{item === 'del' ? '⌫' : item}}</text>
+    </view>
+  </view>
+  <view class="kb-side">
+    <view class="key-side key-again" bindtap="onAgain" hover-class="key-hover" hover-stay-time="60">
+      <text class="key-side-text">再记</text>
+    </view>
+    <view class="key-side key-save {{disabled ? 'key-disabled' : ''}}" bindtap="onSave" hover-class="key-hover" hover-stay-time="60">
+      <text class="key-side-text key-side-text-light">{{saveText}}</text>
+    </view>
+  </view>
+</view>

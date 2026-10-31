@@ -1,0 +1,16 @@
+<view class="cats">
+  <view
+    wx:for="{{categories}}"
+    wx:key="id"
+    class="cat"
+    data-id="{{item.id}}"
+    bindtap="onTap"
+    hover-class="cat-hover"
+    hover-stay-time="60"
+  >
+    <view class="cat-emoji-wrap {{item.id === selectedId ? 'cat-emoji-on' : ''}}">
+      <app-icon icon-key="{{item.iconKey}}" path="{{item.iconPath}}" emoji="{{item.emoji}}" size="{{48}}" />
+    </view>
+    <text class="cat-name {{item.id === selectedId ? 'cat-name-on' : ''}}">{{item.name}}</text>
+  </view>
+</view>

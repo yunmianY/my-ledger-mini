@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "page-bg": "/components/page-bg/page-bg",
+    "navigation-bar": "/components/navigation-bar/navigation-bar",
+    "sheet": "/components/sheet/sheet",
+    "calendar-panel": "/components/calendar-panel/calendar-panel"
+  }
+}

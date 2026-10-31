@@ -1,0 +1,11 @@
+{
+  "usingComponents": {
+    "page-bg": "/components/page-bg/page-bg",
+    "navigation-bar": "/components/navigation-bar/navigation-bar",
+    "amount-keyboard": "/components/amount-keyboard/amount-keyboard",
+    "category-picker": "/components/category-picker/category-picker",
+    "calendar-panel": "/components/calendar-panel/calendar-panel",
+    "time-panel": "/components/time-panel/time-panel",
+    "sheet": "/components/sheet/sheet"
+  }
+}

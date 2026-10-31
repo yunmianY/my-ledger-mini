@@ -1,0 +1,221 @@
+<view class="page">
+  <page-bg />
+
+  <view class="page-body" bindtouchstart="onSwipeStart" bindtouchend="onSwipeEnd">
+    <navigation-bar title="统计" back="{{false}}" color="#1A1A1A" background="transparent"></navigation-bar>
+
+  <view class="page-main">
+    <scroll-view class="scroller" type="list" scroll-y>
+      <view class="month-row">
+        <view class="month-btn" bindtap="prevMonth" hover-class="tap-hover" hover-stay-time="60">
+          <text class="month-arrow">‹</text>
+        </view>
+        <text class="month-text">{{monthText}}</text>
+        <view class="month-btn" bindtap="nextMonth" hover-class="tap-hover" hover-stay-time="60">
+          <text class="month-arrow">›</text>
+        </view>
+        <view wx:if="{{!isCurrentMonth}}" class="today-btn" bindtap="backToToday" hover-class="tap-hover">
+          <text class="today-text">回到本月</text>
+        </view>
+      </view>
+
+      <view class="total-card">
+        <view class="total-head">
+          <text class="total-label">{{type === 'income' ? '本月收入' : '本月支出'}}</text>
+          <view class="type-switch">
+            <text class="type-item {{type === 'expense' ? 'type-on' : ''}}" data-type="expense" bindtap="onType">支出</text>
+            <text class="type-item {{type === 'income' ? 'type-on' : ''}}" data-type="income" bindtap="onType">收入</text>
+          </view>
+        </view>
+        <text class="total-value {{type === 'income' ? 'text-income' : 'text-expense'}}">¥{{totalText}}</text>
+        <view class="total-sub">
+          <text class="total-sub-item">{{countText}}</text>
+          <text class="total-sub-item">日均 ¥{{avgText}}</text>
+        </view>
+      </view>
+
+      <view class="card">
+        <view class="card-head">
+          <text class="card-title">每日{{type === 'income' ? '收入' : '支出'}}</text>
+          <text class="card-hint">点日期看当天明细</text>
+        </view>
+        <month-calendar month="{{month}}" marks="{{marks}}" accent="{{type}}" bind:daytap="onDayTap" />
+      </view>
+
+      <view class="card">
+        <view class="card-head">
+          <text class="card-title">分类占比</text>
+          <view class="view-switch">
+            <view
+              class="view-item {{catView === 'list' ? 'view-on' : ''}}"
+              data-view="list"
+              bindtap="onCatView"
+              hover-class="tap-hover"
+            >
+              <text class="view-text {{catView === 'list' ? 'view-text-on' : ''}}">列表</text>
+            </view>
+            <view
+              class="view-item {{catView === 'pie' ? 'view-on' : ''}}"
+              data-view="pie"
+              bindtap="onCatView"
+              hover-class="tap-hover"
+            >
+              <text class="view-text {{catView === 'pie' ? 'view-text-on' : ''}}">饼图</text>
+            </view>
+          </view>
+        </view>
+
+        <block wx:if="{{catView === 'pie'}}">
+          <pie-chart
+            wx:if="{{pieSlices.length > 0}}"
+            slices="{{pieSlices}}"
+            bind:slice="onPieSlice"
+          />
+          <empty-state
+            wx:else
+            emoji="📊"
+            text="这个月还没有{{type === 'income' ? '收入' : '支出'}}"
+          />
+          <view wx:if="{{pieSlices.length > 0}}" class="pie-legend">
+            <view
+              wx:for="{{pieSlices}}"
+              wx:key="categoryId"
+              class="legend-item"
+              data-id="{{item.categoryId}}"
+              data-name="{{item.name}}"
+              bindtap="onCategoryTap"
+              hover-class="tap-hover"
+            >
+              <view class="legend-dot" style="background: {{item.color}}"></view>
+              <app-icon
+                class="legend-icon"
+                icon-key="{{item.iconKey}}"
+                path="{{item.iconPath}}"
+                emoji="{{item.emoji}}"
+                size="{{30}}"
+              />
+              <text class="legend-name">{{item.name}}</text>
+              <view class="legend-bar">
+                <view class="legend-bar-fill" style="width: {{item.barWidth}}%; background: {{item.color}}"></view>
+              </view>
+              <text class="legend-percent">{{item.percent}}%</text>
+            </view>
+          </view>
+          <text wx:if="{{pieSlices.length > 0}}" class="pie-hint">点环上的色块，或点下面的名称</text>
+        </block>
+
+        <block wx:else>
+          <view
+            wx:for="{{visibleRows}}"
+            wx:key="categoryId"
+            class="cat-row"
+            data-id="{{item.categoryId}}"
+            data-name="{{item.name}}"
+            bindtap="onCategoryTap"
+            hover-class="tap-hover"
+          >
+            <view class="cat-row-head">
+              <app-icon class="icon-gap" icon-key="{{item.iconKey}}" path="{{item.iconPath}}" emoji="{{item.emoji}}" size="{{36}}" />
+              <view class="cat-name-wrap">
+                <text class="cat-name">{{item.name}}</text>
+                <text class="cat-count">{{item.count}} 笔</text>
+              </view>
+              <text class="cat-amount">¥{{item.amountText}}</text>
+              <text class="cat-percent">{{item.percent}}%</text>
+            </view>
+            <ratio-bar percent="{{item.barWidth}}" color="{{item.color}}" />
+          </view>
+          <empty-state
+            wx:if="{{rows.length === 0}}"
+            emoji="📊"
+            text="这个月还没有{{type === 'income' ? '收入' : '支出'}}"
+          />
+        </block>
+
+        <view
+          wx:if="{{hiddenCount > 0}}"
+          class="cat-toggle"
+          bindtap="onToggleCats"
+          hover-class="tap-hover"
+        >
+          <text class="cat-toggle-text">{{catToggleText}}</text>
+        </view>
+      </view>
+
+      <view class="card">
+        <view class="card-head">
+          <text class="card-title">{{year}} 年月度{{type === 'income' ? '收入' : '支出'}}</text>
+          <view class="head-right">
+            <view class="view-switch">
+              <view
+                class="view-item {{trendView === 'bar' ? 'view-on' : ''}}"
+                data-view="bar"
+                bindtap="onTrendView"
+                hover-class="tap-hover"
+              >
+                <text class="view-text {{trendView === 'bar' ? 'view-text-on' : ''}}">柱状</text>
+              </view>
+              <view
+                class="view-item {{trendView === 'line' ? 'view-on' : ''}}"
+                data-view="line"
+                bindtap="onTrendView"
+                hover-class="tap-hover"
+              >
+                <text class="view-text {{trendView === 'line' ? 'view-text-on' : ''}}">折线</text>
+              </view>
+            </view>
+            <view class="year-nav">
+              <view class="year-btn" data-delta="-1" bindtap="onYear" hover-class="tap-hover" hover-stay-time="60">
+                <text class="year-arrow">‹</text>
+              </view>
+              <view class="year-btn" data-delta="1" bindtap="onYear" hover-class="tap-hover" hover-stay-time="60">
+                <text class="year-arrow">›</text>
+              </view>
+            </view>
+          </view>
+        </view>
+
+        <bar-chart wx:if="{{trendView === 'bar'}}" series="{{series}}" type="{{type}}" active-month="{{month}}" />
+        <line-chart wx:else series="{{series}}" type="{{type}}" active-month="{{month}}" />
+
+        <text class="chart-hint">点上方箭头切换年份，高亮为当前月份</text>
+        <view class="bill-entry" bindtap="goBill" hover-class="tap-hover">
+          <text class="bill-entry-text">查看 {{year}} 年度账单</text>
+          <text class="bill-entry-arrow">›</text>
+        </view>
+      </view>
+
+      <view class="bottom-space"></view>
+    </scroll-view>
+  </view>
+
+    <app-tabbar current="stats" />
+  </view>
+
+  <sheet show="{{showList}}" title="{{listTitle}}" bind:close="closeList">
+    <view class="day-sum">
+      <text class="day-sum-total">合计 ¥{{listTotalText}}</text>
+      <text class="day-sum-count">{{listCount}} 笔</text>
+    </view>
+    <view class="day-list">
+      <scroll-view
+        wx:if="{{listItems.length > 0}}"
+        class="day-scroll"
+        type="list"
+        scroll-y
+        style="height: {{listHeight}}rpx;"
+      >
+        <txn-item
+          wx:for="{{listItems}}"
+          wx:key="id"
+          item="{{item}}"
+          bind:itemtap="onListItemTap"
+        />
+      </scroll-view>
+      <empty-state wx:else emoji="🌤️" text="这里还没有记录" />
+      <view wx:if="{{listMore > 0}}" class="day-more">
+        <text class="day-more-text">还有 {{listMore}} 笔，去明细页查看全部</text>
+      </view>
+    </view>
+  </sheet>
+</view>

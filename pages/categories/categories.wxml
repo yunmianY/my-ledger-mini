@@ -1,0 +1,92 @@
+<view class="page">
+  <page-bg />
+
+  <view class="page-body">
+    <navigation-bar title="分类管理" back="{{true}}" color="#1A1A1A" background="transparent"></navigation-bar>
+
+  <view class="page-main">
+    <view class="tabs">
+      <view class="tab {{type === 'expense' ? 'tab-on' : ''}}" data-type="expense" bindtap="onType" hover-class="tap-hover">
+        <text class="tab-text {{type === 'expense' ? 'tab-text-on' : ''}}">支出分类</text>
+      </view>
+      <view class="tab {{type === 'income' ? 'tab-on' : ''}}" data-type="income" bindtap="onType" hover-class="tap-hover">
+        <text class="tab-text {{type === 'income' ? 'tab-text-on' : ''}}">收入分类</text>
+      </view>
+    </view>
+
+    <scroll-view class="scroller" type="list" scroll-y>
+      <view class="list">
+        <view wx:for="{{list}}" wx:key="id" class="cat-row">
+          <app-icon class="icon-gap" icon-key="{{item.iconKey}}" path="{{item.iconPath}}" emoji="{{item.emoji}}" size="{{44}}" />
+          <view class="cat-name-wrap" data-id="{{item.id}}" bindtap="onEdit" hover-class="tap-hover">
+            <text class="cat-name">{{item.name}}</text>
+          </view>
+          <view class="cat-act {{item.canUp ? '' : 'act-off'}}" data-id="{{item.id}}" data-dir="-1" bindtap="onMove">
+            <text class="act-text">↑</text>
+          </view>
+          <view class="cat-act {{item.canDown ? '' : 'act-off'}}" data-id="{{item.id}}" data-dir="1" bindtap="onMove">
+            <text class="act-text">↓</text>
+          </view>
+          <view class="cat-act" data-id="{{item.id}}" bindtap="onDelete">
+            <text class="act-text act-del">✕</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="list-tip">点分类名可以改名或换图标</view>
+
+      <view class="add-wrap">
+        <view class="btn btn-ghost" bindtap="openAdd" hover-class="btn-hover">
+          <text>＋ 新建分类</text>
+        </view>
+      </view>
+
+      <empty-state wx:if="{{list.length === 0}}" emoji="🏷️" text="还没有分类" />
+      <view class="bottom-space"></view>
+    </scroll-view>
+  </view>
+  </view>
+
+  <sheet show="{{showForm}}" title="{{formTitle}}" bind:close="closeForm">
+    <view class="form-tip">分类名称</view>
+    <input
+      class="form-input"
+      value="{{formName}}"
+      placeholder="例如：宠物、健身"
+      placeholder-class="placeholder"
+      maxlength="8"
+      bindinput="onName"
+    />
+    <view class="form-tip">图标</view>
+    <view class="icon-row">
+      <view class="icon-preview {{formIconPath || formIconKey ? '' : 'icon-preview-empty'}}">
+        <app-icon icon-key="{{formIconKey}}" path="{{formIconPath}}" emoji="{{formEmoji}}" size="{{48}}" />
+      </view>
+      <view class="icon-actions">
+        <view class="icon-btn" bindtap="onPickIcon" hover-class="tap-hover">
+          <text class="icon-btn-text">上传图片</text>
+        </view>
+        <view wx:if="{{formIconPath}}" class="icon-btn icon-btn-ghost" bindtap="onClearIcon" hover-class="tap-hover">
+          <text class="icon-btn-text">清除图标</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="form-tip">或者选一个图标</view>
+    <view class="icon-grid">
+      <view
+        wx:for="{{categoryIcons}}"
+        wx:key="key"
+        class="icon-pick {{item.key === formIconKey ? 'icon-pick-on' : ''}}"
+        data-key="{{item.key}}"
+        bindtap="onSelectIcon"
+        hover-class="tap-hover"
+      >
+        <app-icon icon-key="{{item.key}}" emoji="🖼️" size="{{44}}" />
+      </view>
+    </view>
+    <view class="btn btn-primary form-btn" bindtap="onSubmit" hover-class="btn-hover">
+      <text>保存</text>
+    </view>
+  </sheet>
+</view>

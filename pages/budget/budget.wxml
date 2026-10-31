@@ -1,0 +1,71 @@
+<view class="page">
+  <page-bg />
+
+  <view class="page-body">
+    <navigation-bar title="预算设置" back="{{true}}" color="#1A1A1A" background="transparent"></navigation-bar>
+
+  <view class="page-main">
+    <scroll-view class="scroller" type="list" scroll-y>
+      <view class="month-row">
+        <view class="month-btn" bindtap="prevMonth" hover-class="tap-hover" hover-stay-time="60">
+          <text class="month-arrow">‹</text>
+        </view>
+        <text class="month-text">{{monthText}}</text>
+        <view class="month-btn" bindtap="nextMonth" hover-class="tap-hover" hover-stay-time="60">
+          <text class="month-arrow">›</text>
+        </view>
+        <view wx:if="{{!isCurrentMonth}}" class="today-btn" bindtap="backToToday" hover-class="tap-hover">
+          <text class="today-text">回到本月</text>
+        </view>
+      </view>
+
+      <view class="card">
+        <text class="card-title">月度总预算</text>
+        <view class="amount-field">
+          <text class="unit">¥</text>
+          <input
+            class="amount-input"
+            type="digit"
+            value="{{totalInput}}"
+            placeholder="0.00"
+            placeholder-class="placeholder"
+            bindinput="onTotal"
+          />
+        </view>
+        <text class="hint">{{totalHint}}</text>
+      </view>
+
+      <view class="section-title">分类预算（可选，留空表示不限）</view>
+
+      <view class="card">
+        <view wx:for="{{rows}}" wx:key="id" class="cat-row">
+          <app-icon class="icon-gap" icon-key="{{item.iconKey}}" path="{{item.iconPath}}" emoji="{{item.emoji}}" size="{{40}}" />
+          <view class="cat-main">
+            <text class="cat-name">{{item.name}}</text>
+            <text class="cat-spent">已花 ¥{{item.spentText}}</text>
+          </view>
+          <input
+            class="cat-input"
+            type="digit"
+            value="{{item.input}}"
+            data-index="{{index}}"
+            placeholder="不限"
+            placeholder-class="placeholder"
+            bindinput="onCell"
+          />
+        </view>
+      </view>
+
+      <text class="tip">没单独设预算的分类，只计入总预算。预算会沿用到之后没有单独设置的月份。</text>
+
+      <view class="save-wrap">
+        <view class="btn btn-primary" bindtap="save" hover-class="btn-hover">
+          <text>保存预算</text>
+        </view>
+      </view>
+
+      <view class="bottom-space"></view>
+    </scroll-view>
+  </view>
+  </view>
+</view>

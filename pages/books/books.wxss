@@ -1,0 +1,152 @@
+.list {
+  background: #ffffff;
+  border-radius: 24rpx;
+  margin: 8rpx 24rpx 0;
+  overflow: hidden;
+}
+
+.book-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 28rpx;
+  border-bottom: 1rpx solid rgba(0, 0, 0, 0.05);
+}
+
+.book-row-emoji {
+  font-size: 44rpx;
+  margin-right: 20rpx;
+}
+
+.book-row-icon {
+  width: 56rpx;
+  height: 56rpx;
+  border-radius: 16rpx;
+  margin-right: 20rpx;
+}
+
+.book-row-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.book-row-name {
+  font-size: 30rpx;
+  color: #1a1a1a;
+  font-weight: 500;
+}
+
+.book-row-sub {
+  font-size: 22rpx;
+  color: #a0a0a0;
+  margin-top: 4rpx;
+}
+
+.book-tag {
+  font-size: 20rpx;
+  color: #e4572e;
+  background: #fdeee8;
+  border-radius: 999rpx;
+  padding: 4rpx 14rpx;
+  margin-right: 12rpx;
+}
+
+.book-more {
+  width: 64rpx;
+  height: 64rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.book-more-text {
+  font-size: 34rpx;
+  color: #b0b0b0;
+  line-height: 34rpx;
+}
+
+.add-wrap {
+  padding: 24rpx 24rpx 0;
+}
+
+.form-tip {
+  font-size: 24rpx;
+  color: #8a8a8a;
+  margin: 16rpx 0 12rpx;
+}
+
+.form-input {
+  height: 88rpx;
+  background: #f7f7f5;
+  border-radius: 16rpx;
+  padding: 0 24rpx;
+  font-size: 30rpx;
+}
+
+.icon-grid {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.icon-pick {
+  width: 12.5%;
+  height: 88rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16rpx;
+  box-sizing: border-box;
+  border: 2rpx solid transparent;
+}
+
+.icon-pick-on {
+  background: #fdeee8;
+  border-color: #e4572e;
+}
+
+.form-btn {
+  margin-top: 32rpx;
+}
+
+.icon-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.icon-preview {
+  width: 96rpx;
+  height: 96rpx;
+  border-radius: 24rpx;
+  background: #f7f7f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+
+.icon-actions {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-left: 24rpx;
+}
+
+.icon-btn {
+  padding: 12rpx 24rpx;
+  border-radius: 999rpx;
+  background: #fdeee8;
+  margin: 6rpx 12rpx 6rpx 0;
+}
+
+.icon-btn-ghost {
+  background: #f7f7f5;
+}
+
+.icon-btn-text {
+  font-size: 24rpx;
+  color: #e4572e;
+}

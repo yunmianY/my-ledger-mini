@@ -1,0 +1,40 @@
+<view class="page">
+  <page-bg />
+
+  <view class="page-body">
+    <navigation-bar title="外观" back="{{true}}" color="#1A1A1A" background="transparent"></navigation-bar>
+
+    <view class="page-main">
+      <scroll-view class="scroller" type="list" scroll-y>
+        <view class="preview">
+          <image wx:if="{{background}}" class="preview-img" src="{{background}}" mode="aspectFill" />
+          <view wx:else class="preview-empty">
+            <text class="preview-emoji">🖼️</text>
+            <text class="preview-tip">还没有设置背景图</text>
+          </view>
+        </view>
+
+        <view class="card">
+          <view class="action" bindtap="chooseBackground" hover-class="tap-hover">
+            <view class="action-main">
+              <text class="action-title">{{background ? '更换背景图' : '选择背景图'}}</text>
+              <text class="action-sub">从相册选择，可拖动裁切后再保存</text>
+            </view>
+            <text class="action-arrow">›</text>
+          </view>
+          <view wx:if="{{background}}" class="action action-last" bindtap="removeBackground" hover-class="tap-hover">
+            <view class="action-main">
+              <text class="action-title action-danger">移除背景图</text>
+              <text class="action-sub">恢复成默认的浅灰底色</text>
+            </view>
+            <text class="action-arrow">›</text>
+          </view>
+        </view>
+
+        <text class="tip">背景图会应用到所有页面，并自动压暗一层保证文字可读。图片存在小程序本地目录，卸载小程序或清理缓存会一起丢失。</text>
+
+        <view class="bottom-space"></view>
+      </scroll-view>
+    </view>
+  </view>
+</view>

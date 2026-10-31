@@ -1,0 +1,16 @@
+{
+  "usingComponents": {
+    "page-bg": "/components/page-bg/page-bg",
+    "app-icon": "/components/app-icon/app-icon",
+    "navigation-bar": "/components/navigation-bar/navigation-bar",
+    "month-calendar": "/components/month-calendar/month-calendar",
+    "txn-item": "/components/txn-item/txn-item",
+    "sheet": "/components/sheet/sheet",
+    "app-tabbar": "/components/app-tabbar/app-tabbar",
+    "ratio-bar": "/components/ratio-bar/ratio-bar",
+    "bar-chart": "/components/bar-chart/bar-chart",
+    "line-chart": "/components/line-chart/line-chart",
+    "pie-chart": "/components/pie-chart/pie-chart",
+    "empty-state": "/components/empty-state/empty-state"
+  }
+}

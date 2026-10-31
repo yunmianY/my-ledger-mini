@@ -1,0 +1,4 @@
+<view wx:if="{{url}}" class="bg-layer">
+  <image class="bg-image" src="{{url}}" mode="aspectFill" />
+  <view class="bg-scrim"></view>
+</view>

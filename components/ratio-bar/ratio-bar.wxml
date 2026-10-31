@@ -1,0 +1,3 @@
+<view class="ratio">
+  <view class="ratio-fill" style="width: {{width}}%; background: {{color}}"></view>
+</view>

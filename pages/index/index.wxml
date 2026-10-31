@@ -1,0 +1,99 @@
+<view class="page">
+  <page-bg />
+
+  <view class="page-body" bindtouchstart="onSwipeStart" bindtouchend="onSwipeEnd">
+    <navigation-bar title="明细" back="{{false}}" color="#1A1A1A" background="transparent"></navigation-bar>
+
+  <view class="page-main">
+    <scroll-view class="scroller" type="list" scroll-y>
+      <view class="overview">
+        <view class="month-row">
+          <view class="month-btn" bindtap="prevMonth" hover-class="tap-hover" hover-stay-time="60">
+            <text class="month-arrow">‹</text>
+          </view>
+          <text class="month-text">{{monthText}}</text>
+          <view class="month-btn" bindtap="nextMonth" hover-class="tap-hover" hover-stay-time="60">
+            <text class="month-arrow">›</text>
+          </view>
+          <view wx:if="{{!isCurrentMonth}}" class="today-btn" bindtap="backToToday" hover-class="tap-hover">
+            <text class="today-text">回到本月</text>
+          </view>
+        </view>
+
+        <view class="amount-row">
+          <view class="amount-block">
+            <text class="amount-label">支出</text>
+            <text class="amount-value amount-expense">{{summary.expenseText}}</text>
+          </view>
+          <view class="amount-block">
+            <text class="amount-label">收入</text>
+            <text class="amount-value amount-income">{{summary.incomeText}}</text>
+          </view>
+          <view class="amount-block">
+            <text class="amount-label">结余</text>
+            <text class="amount-value">{{summary.balanceText}}</text>
+          </view>
+        </view>
+
+        <view wx:if="{{budget}}" class="budget">
+          <view class="budget-head">
+            <text class="budget-label">本月预算</text>
+            <text class="budget-text budget-text-{{budget.state}}">{{budget.restText}}</text>
+          </view>
+          <view class="budget-track">
+            <view class="budget-fill budget-fill-{{budget.state}}" style="width: {{budget.percent}}%"></view>
+          </view>
+          <text class="budget-detail">{{budget.text}}</text>
+        </view>
+      </view>
+
+      <view wx:if="{{members.length > 1}}" class="chips">
+        <view class="chip {{memberFilter === '' ? 'chip-on' : ''}}" data-value="" bindtap="onMemberFilter">
+          <text class="chip-text {{memberFilter === '' ? 'chip-text-on' : ''}}">全部</text>
+        </view>
+        <view
+          wx:for="{{members}}"
+          wx:key="*this"
+          class="chip {{memberFilter === item ? 'chip-on' : ''}}"
+          data-value="{{item}}"
+          bindtap="onMemberFilter"
+        >
+          <text class="chip-text {{memberFilter === item ? 'chip-text-on' : ''}}">{{item}}</text>
+        </view>
+      </view>
+
+      <view wx:for="{{groups}}" wx:key="date" class="day-group">
+        <view class="day-head">
+          <text class="day-date">{{item.dateText}} · {{item.weekText}}</text>
+          <text class="day-sum">{{item.sumText}}</text>
+        </view>
+        <view class="day-card">
+          <txn-item
+            wx:for="{{item.items}}"
+            wx:for-item="txn"
+            wx:key="id"
+            item="{{txn}}"
+            bind:itemtap="onTxnTap"
+            bind:itemlong="onTxnLong"
+          />
+        </view>
+      </view>
+
+      <empty-state
+        wx:if="{{loaded && groups.length === 0}}"
+        emoji="🌱"
+        text="这个月还没有记账"
+        hint="点右下角的 + 记第一笔"
+      />
+
+      <view class="bottom-space"></view>
+    </scroll-view>
+
+    <view class="fab" bindtap="goRecord" hover-class="fab-hover" hover-stay-time="60">
+      <text class="fab-plus">+</text>
+    </view>
+  </view>
+
+    <app-tabbar current="index" />
+  </view>
+</view>

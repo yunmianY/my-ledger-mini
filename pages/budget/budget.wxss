@@ -1,0 +1,139 @@
+.month-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 8rpx 24rpx 20rpx;
+}
+
+.month-btn {
+  width: 56rpx;
+  height: 56rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 28rpx;
+  background: #ffffff;
+}
+
+.month-arrow {
+  font-size: 32rpx;
+  color: #1a1a1a;
+  line-height: 32rpx;
+}
+
+.month-text {
+  font-size: 30rpx;
+  font-weight: 600;
+  margin: 0 16rpx;
+}
+
+.today-btn {
+  margin-left: 12rpx;
+  padding: 4rpx 18rpx;
+  border-radius: 999rpx;
+  background: #fdeee8;
+}
+
+.today-text {
+  font-size: 22rpx;
+  color: #e4572e;
+}
+
+.card-title {
+  font-size: 26rpx;
+  color: #8a8a8a;
+}
+
+.amount-field {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  margin-top: 16rpx;
+  border-bottom: 1rpx solid rgba(0, 0, 0, 0.06);
+  padding-bottom: 12rpx;
+}
+
+.unit {
+  font-size: 36rpx;
+  color: #1a1a1a;
+  margin-right: 8rpx;
+  margin-bottom: 6rpx;
+}
+
+.amount-input {
+  flex: 1;
+  font-size: 56rpx;
+  font-weight: 600;
+  color: #1a1a1a;
+  height: 76rpx;
+}
+
+.hint {
+  font-size: 22rpx;
+  color: #a0a0a0;
+  margin-top: 12rpx;
+}
+
+.cat-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 104rpx;
+  border-bottom: 1rpx solid rgba(0, 0, 0, 0.05);
+}
+
+.cat-emoji {
+  font-size: 34rpx;
+  width: 56rpx;
+}
+
+.cat-icon-img {
+  width: 44rpx;
+  height: 44rpx;
+  border-radius: 12rpx;
+  margin-right: 12rpx;
+}
+
+.icon-gap {
+  margin-right: 12rpx;
+}
+
+.cat-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.cat-name {
+  font-size: 28rpx;
+  color: #1a1a1a;
+}
+
+.cat-spent {
+  font-size: 20rpx;
+  color: #b0b0b0;
+  margin-top: 2rpx;
+}
+
+.cat-input {
+  width: 200rpx;
+  height: 72rpx;
+  text-align: right;
+  font-size: 30rpx;
+  color: #1a1a1a;
+  background: #f7f7f5;
+  border-radius: 12rpx;
+  padding: 0 16rpx;
+  box-sizing: border-box;
+}
+
+.tip {
+  font-size: 22rpx;
+  color: #b0b0b0;
+  line-height: 34rpx;
+  margin: 8rpx 40rpx 0;
+}
+
+.save-wrap {
+  padding: 32rpx 24rpx 0;
+}

@@ -1,0 +1,21 @@
+<view class="tabbar">
+  <view
+    wx:for="{{tabs}}"
+    wx:key="key"
+    class="tab"
+    data-key="{{item.key}}"
+    bindtap="onTap"
+    hover-class="tab-hover"
+    hover-stay-time="80"
+  >
+    <image
+      wx:if="{{item.icon && !iconsBroken}}"
+      class="tab-icon {{item.key === current ? 'tab-icon-on' : ''}}"
+      src="{{item.icon}}"
+      mode="aspectFit"
+      binderror="onIconError"
+    />
+    <text wx:else class="tab-emoji {{item.key === current ? 'tab-on' : ''}}">{{item.emoji}}</text>
+    <text class="tab-label {{item.key === current ? 'tab-on' : ''}}">{{item.label}}</text>
+  </view>
+</view>

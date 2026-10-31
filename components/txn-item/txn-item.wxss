@@ -1,0 +1,88 @@
+.txn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 20rpx 28rpx;
+  background: #ffffff;
+}
+
+.txn-hover {
+  background: #faf9f6;
+}
+
+.txn-emoji-wrap {
+  width: 76rpx;
+  height: 76rpx;
+  border-radius: 24rpx;
+  background: #f5f3ee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+
+.txn-icon-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 24rpx;
+}
+
+.txn-main {
+  flex: 1;
+  margin-left: 20rpx;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.txn-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  height: 44rpx;
+}
+
+.txn-name {
+  font-size: 30rpx;
+  color: #1a1a1a;
+  flex: 1;
+  margin-right: 12rpx;
+}
+
+.txn-note {
+  font-size: 22rpx;
+  color: #a0a0a0;
+  flex: 1;
+  margin-right: 12rpx;
+}
+
+.txn-time {
+  font-size: 22rpx;
+  color: #b0b0b0;
+  flex: none;
+  margin-right: 10rpx;
+}
+
+.txn-amount {
+  font-size: 32rpx;
+  font-weight: 600;
+  flex: none;
+}
+
+.txn-expense {
+  color: #1a1a1a;
+}
+
+.txn-income {
+  color: #2a9d8f;
+}
+
+.txn-member {
+  font-size: 20rpx;
+  color: #8a8a8a;
+  background: #f2f2ef;
+  border-radius: 20rpx;
+  padding: 2rpx 12rpx;
+  flex: none;
+}

@@ -1,0 +1,213 @@
+.year-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 8rpx 24rpx 20rpx;
+}
+
+.year-btn {
+  width: 56rpx;
+  height: 56rpx;
+  border-radius: 28rpx;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.year-arrow {
+  font-size: 32rpx;
+  color: #1a1a1a;
+  line-height: 32rpx;
+}
+
+.year-text {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 20rpx;
+}
+
+.today-btn {
+  margin-left: 12rpx;
+  padding: 4rpx 18rpx;
+  border-radius: 999rpx;
+  background: #fdeee8;
+}
+
+.today-text {
+  font-size: 22rpx;
+  color: #e4572e;
+}
+
+.hero {
+  background: #ffffff;
+  margin: 0 24rpx 20rpx;
+  padding: 32rpx 28rpx;
+  border-radius: 28rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-label {
+  font-size: 24rpx;
+  color: #8a8a8a;
+}
+
+.hero-value {
+  font-size: 64rpx;
+  font-weight: 700;
+  color: #2a9d8f;
+  margin-top: 8rpx;
+  line-height: 74rpx;
+}
+
+.hero-negative {
+  color: #e4572e;
+}
+
+.hero-bar-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 26rpx;
+}
+
+.hero-bar-label {
+  width: 116rpx;
+  flex: none;
+  font-size: 24rpx;
+  color: #8a8a8a;
+}
+
+.hero-track {
+  flex: 1;
+  height: 16rpx;
+  border-radius: 999rpx;
+  background: #f2f0eb;
+  margin: 0 16rpx;
+  overflow: hidden;
+}
+
+.hero-fill {
+  height: 16rpx;
+  border-radius: 999rpx;
+}
+
+.hero-fill-expense {
+  background: #e4572e;
+}
+
+.hero-fill-income {
+  background: #2a9d8f;
+}
+
+.hero-bar-value {
+  width: 176rpx;
+  flex: none;
+  text-align: right;
+  font-size: 24rpx;
+  color: #1a1a1a;
+}
+
+.table {
+  background: #ffffff;
+  margin: 0 24rpx;
+  border-radius: 24rpx;
+  overflow: hidden;
+}
+
+.thead {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: #fdf0e9;
+  padding: 20rpx 20rpx;
+}
+
+.th {
+  font-size: 22rpx;
+  color: #b2603a;
+}
+
+.th-month {
+  width: 16%;
+  flex: none;
+}
+
+.th-num {
+  flex: 1;
+  text-align: right;
+}
+
+.th-arrow {
+  width: 36rpx;
+  flex: none;
+}
+
+.tr {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 26rpx 20rpx;
+  border-bottom: 1rpx solid rgba(0, 0, 0, 0.05);
+}
+
+.tr-hover {
+  background: #faf7f2;
+}
+
+.td {
+  font-size: 26rpx;
+  color: #1a1a1a;
+}
+
+.td-month {
+  width: 16%;
+  flex: none;
+  font-size: 28rpx;
+}
+
+.td-num {
+  flex: 1;
+  text-align: right;
+}
+
+.td-arrow {
+  width: 36rpx;
+  flex: none;
+  text-align: right;
+  color: #c0c0c0;
+}
+
+.td-zero {
+  color: #c8c8c8;
+}
+
+.td-expense {
+  color: #e4572e;
+}
+
+.td-income {
+  color: #2a9d8f;
+}
+
+.table-empty {
+  padding: 64rpx 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.table-empty-text {
+  font-size: 26rpx;
+  color: #b0b0b0;
+}
+
+.table-tip {
+  font-size: 22rpx;
+  color: #b0b0b0;
+  line-height: 34rpx;
+  margin: 16rpx 40rpx 0;
+}

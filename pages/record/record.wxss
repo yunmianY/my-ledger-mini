@@ -1,0 +1,139 @@
+.form {
+  flex: 1;
+  min-height: 0;
+}
+
+.seg {
+  display: flex;
+  flex-direction: row;
+  background: #ffffff;
+  margin: 8rpx 24rpx 0;
+  border-radius: 999rpx;
+  padding: 6rpx;
+}
+
+.seg-item {
+  flex: 1;
+  height: 64rpx;
+  border-radius: 999rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.seg-on {
+  background: #fdeee8;
+}
+
+.seg-text {
+  font-size: 28rpx;
+  color: #8a8a8a;
+}
+
+.seg-text-on {
+  color: #e4572e;
+  font-weight: 600;
+}
+
+.amount {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 56rpx 32rpx 40rpx;
+}
+
+.amount-unit {
+  font-size: 40rpx;
+  color: #1a1a1a;
+  margin-right: 8rpx;
+  margin-bottom: 8rpx;
+}
+
+.amount-num {
+  font-size: 84rpx;
+  font-weight: 600;
+  line-height: 92rpx;
+}
+
+.amount-num-expense {
+  color: #1a1a1a;
+}
+
+.amount-num-income {
+  color: #2a9d8f;
+}
+
+.meta {
+  background: #ffffff;
+  border-radius: 24rpx;
+  margin: 0 24rpx;
+  padding: 0 28rpx;
+}
+
+.meta-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  height: 96rpx;
+  border-bottom: 1rpx solid rgba(0, 0, 0, 0.05);
+}
+
+.meta-label {
+  font-size: 28rpx;
+  color: #8a8a8a;
+  flex: none;
+  width: 120rpx;
+}
+
+.meta-value {
+  font-size: 28rpx;
+  color: #1a1a1a;
+  flex: 1;
+  text-align: right;
+}
+
+.meta-input {
+  flex: 1;
+  font-size: 28rpx;
+  color: #1a1a1a;
+  text-align: right;
+  height: 96rpx;
+}
+
+.cat-title {
+  font-size: 24rpx;
+  color: #8a8a8a;
+  margin: 32rpx 32rpx 8rpx;
+}
+
+.cat-wrap {
+  background: #ffffff;
+  border-radius: 24rpx;
+  margin: 0 24rpx;
+  padding: 16rpx 8rpx;
+}
+
+.form-bottom {
+  height: 40rpx;
+}
+
+.option {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  height: 96rpx;
+  border-bottom: 1rpx solid rgba(0, 0, 0, 0.05);
+}
+
+.option-text {
+  font-size: 30rpx;
+  color: #1a1a1a;
+}
+
+.option-check {
+  font-size: 30rpx;
+  color: #e4572e;
+}

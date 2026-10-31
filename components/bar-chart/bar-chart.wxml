@@ -1,0 +1,8 @@
+<view class="chart">
+  <view wx:for="{{bars}}" wx:key="month" class="chart-col">
+    <view class="chart-track">
+      <view class="chart-bar {{item.active ? 'chart-bar-on' : ''}}" style="height: {{item.height}}%"></view>
+    </view>
+    <text class="chart-label {{item.active ? 'chart-label-on' : ''}}">{{item.label}}</text>
+  </view>
+</view>

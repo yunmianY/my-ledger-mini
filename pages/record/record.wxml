@@ -1,0 +1,90 @@
+<view class="page">
+  <page-bg />
+
+  <view class="page-body">
+    <navigation-bar
+      title="{{mode === 'edit' ? '编辑记录' : '记一笔'}}"
+      back="{{true}}"
+      color="#1A1A1A"
+      background="transparent"
+    ></navigation-bar>
+
+  <scroll-view class="form" type="list" scroll-y>
+    <view class="seg">
+      <view class="seg-item {{type === 'expense' ? 'seg-on' : ''}}" data-type="expense" bindtap="onType" hover-class="tap-hover">
+        <text class="seg-text {{type === 'expense' ? 'seg-text-on' : ''}}">支出</text>
+      </view>
+      <view class="seg-item {{type === 'income' ? 'seg-on' : ''}}" data-type="income" bindtap="onType" hover-class="tap-hover">
+        <text class="seg-text {{type === 'income' ? 'seg-text-on' : ''}}">收入</text>
+      </view>
+    </view>
+
+    <view class="amount">
+      <text class="amount-unit">¥</text>
+      <text class="amount-num {{type === 'income' ? 'amount-num-income' : 'amount-num-expense'}}">{{amountText}}</text>
+    </view>
+
+    <view class="meta">
+      <view class="meta-row" bindtap="openDate" hover-class="tap-hover">
+        <text class="meta-label">日期</text>
+        <text class="meta-value">{{dateText}}</text>
+      </view>
+      <view class="meta-row" bindtap="openTime" hover-class="tap-hover">
+        <text class="meta-label">时间</text>
+        <text class="meta-value">{{time}}</text>
+      </view>
+      <view class="meta-row" bindtap="openMember" hover-class="tap-hover">
+        <text class="meta-label">记账人</text>
+        <text class="meta-value">{{member ? member : '未指定'}}</text>
+      </view>
+      <view class="meta-row">
+        <text class="meta-label">备注</text>
+        <input
+          class="meta-input"
+          value="{{note}}"
+          placeholder="随手写点什么"
+          placeholder-class="placeholder"
+          maxlength="50"
+          bindinput="onNote"
+        />
+      </view>
+    </view>
+
+    <view class="cat-title">选择分类</view>
+    <view class="cat-wrap">
+      <category-picker categories="{{categories}}" selected-id="{{categoryId}}" bind:change="onCategory" />
+    </view>
+
+    <view class="form-bottom"></view>
+  </scroll-view>
+
+  <amount-keyboard
+    bind:key="onKey"
+    bind:save="onSave"
+    bind:again="onAgain"
+      save-text="{{mode === 'edit' ? '保存修改' : '保存'}}"
+    />
+  </view>
+
+  <sheet show="{{showDate}}" title="选择日期" bind:close="closeDate">
+    <calendar-panel value="{{date}}" bind:select="onDateSelect" />
+  </sheet>
+
+  <sheet show="{{showTime}}" title="选择时间" bind:close="closeTime">
+    <time-panel value="{{time}}" bind:confirm="onTimeConfirm" bind:cancel="closeTime" />
+  </sheet>
+
+  <sheet show="{{showMember}}" title="记账人" bind:close="closeMember">
+    <view
+      wx:for="{{memberOptions}}"
+      wx:key="*this"
+      class="option"
+      data-value="{{item}}"
+      bindtap="onMemberSelect"
+      hover-class="tap-hover"
+    >
+      <text class="option-text">{{item ? item : '不指定'}}</text>
+      <text wx:if="{{item === member}}" class="option-check">✓</text>
+    </view>
+  </sheet>
+</view>

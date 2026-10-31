@@ -1,0 +1,197 @@
+.tabs {
+  display: flex;
+  flex-direction: row;
+  background: #ffffff;
+  margin: 8rpx 24rpx 16rpx;
+  border-radius: 999rpx;
+  padding: 6rpx;
+}
+
+.tab {
+  flex: 1;
+  height: 64rpx;
+  border-radius: 999rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tab-on {
+  background: #fdeee8;
+}
+
+.tab-text {
+  font-size: 26rpx;
+  color: #8a8a8a;
+}
+
+.tab-text-on {
+  color: #e4572e;
+  font-weight: 600;
+}
+
+.list {
+  background: #ffffff;
+  border-radius: 24rpx;
+  margin: 0 24rpx;
+  overflow: hidden;
+}
+
+.cat-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 104rpx;
+  padding: 0 20rpx 0 28rpx;
+  border-bottom: 1rpx solid rgba(0, 0, 0, 0.05);
+}
+
+.cat-emoji {
+  font-size: 36rpx;
+  width: 60rpx;
+}
+
+.cat-icon-img {
+  width: 52rpx;
+  height: 52rpx;
+  border-radius: 14rpx;
+  margin-right: 8rpx;
+}
+
+.icon-gap {
+  margin-right: 8rpx;
+}
+
+.cat-name-wrap {
+  flex: 1;
+  height: 104rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.cat-name {
+  font-size: 30rpx;
+  color: #1a1a1a;
+}
+
+.cat-act {
+  width: 64rpx;
+  height: 64rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16rpx;
+}
+
+.act-off {
+  opacity: 0.2;
+}
+
+.act-text {
+  font-size: 28rpx;
+  color: #8a8a8a;
+}
+
+.act-del {
+  color: #d64545;
+}
+
+.list-tip {
+  font-size: 22rpx;
+  color: #b0b0b0;
+  margin: 16rpx 40rpx;
+}
+
+.add-wrap {
+  padding: 8rpx 24rpx 0;
+}
+
+.form-tip {
+  font-size: 24rpx;
+  color: #8a8a8a;
+  margin: 16rpx 0 12rpx;
+}
+
+.form-input {
+  height: 88rpx;
+  background: #f7f7f5;
+  border-radius: 16rpx;
+  padding: 0 24rpx;
+  font-size: 30rpx;
+}
+
+.icon-grid {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.icon-pick {
+  width: 12.5%;
+  height: 88rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16rpx;
+  box-sizing: border-box;
+  border: 2rpx solid transparent;
+}
+
+.icon-pick-on {
+  background: #fdeee8;
+  border-color: #e4572e;
+}
+
+.form-btn {
+  margin-top: 32rpx;
+}
+
+.icon-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.icon-preview {
+  width: 96rpx;
+  height: 96rpx;
+  border-radius: 24rpx;
+  background: #f7f7f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+
+.icon-preview-empty {
+  border: 2rpx dashed rgba(0, 0, 0, 0.12);
+}
+
+.icon-preview-emoji {
+  font-size: 44rpx;
+}
+
+.icon-actions {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-left: 24rpx;
+}
+
+.icon-btn {
+  padding: 12rpx 24rpx;
+  border-radius: 999rpx;
+  background: #fdeee8;
+  margin: 6rpx 12rpx 6rpx 0;
+}
+
+.icon-btn-ghost {
+  background: #f7f7f5;
+}
+
+.icon-btn-text {
+  font-size: 24rpx;
+  color: #e4572e;
+}

@@ -1,0 +1,12 @@
+.pie {
+  width: 100%;
+  height: 380rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pie-canvas {
+  width: 380rpx;
+  height: 380rpx;
+}

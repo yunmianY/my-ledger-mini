@@ -1,0 +1,81 @@
+<view class="page">
+  <page-bg />
+
+  <view class="page-body">
+    <navigation-bar title="年度账单" back="{{true}}" color="#1A1A1A" background="transparent"></navigation-bar>
+
+    <view class="page-main">
+      <scroll-view class="scroller" type="list" scroll-y>
+        <view class="year-row">
+          <view class="year-btn" bindtap="prevYear" hover-class="tap-hover" hover-stay-time="60">
+            <text class="year-arrow">‹</text>
+          </view>
+          <text class="year-text">{{year}}年</text>
+          <view class="year-btn" bindtap="nextYear" hover-class="tap-hover" hover-stay-time="60">
+            <text class="year-arrow">›</text>
+          </view>
+          <view wx:if="{{!isCurrentYear}}" class="today-btn" bindtap="backToThisYear" hover-class="tap-hover">
+            <text class="today-text">回到今年</text>
+          </view>
+        </view>
+
+        <view class="hero">
+          <text class="hero-label">本年结余</text>
+          <text class="hero-value {{balanceNegative ? 'hero-negative' : ''}}">{{balanceText}}</text>
+
+          <view class="hero-bar-row">
+            <text class="hero-bar-label">本年支出</text>
+            <view class="hero-track">
+              <view class="hero-fill hero-fill-expense" style="width: {{expenseWidth}}%"></view>
+            </view>
+            <text class="hero-bar-value">{{expenseText}}</text>
+          </view>
+
+          <view class="hero-bar-row">
+            <text class="hero-bar-label">本年收入</text>
+            <view class="hero-track">
+              <view class="hero-fill hero-fill-income" style="width: {{incomeWidth}}%"></view>
+            </view>
+            <text class="hero-bar-value">{{incomeText}}</text>
+          </view>
+        </view>
+
+        <view class="section-title">账单列表</view>
+
+        <view class="table">
+          <view class="thead">
+            <text class="th th-month">月份</text>
+            <text class="th th-num">支出</text>
+            <text class="th th-num">收入</text>
+            <text class="th th-num">结余</text>
+            <text class="th th-arrow"></text>
+          </view>
+
+          <view
+            wx:for="{{rows}}"
+            wx:key="month"
+            class="tr"
+            data-month="{{item.month}}"
+            bindtap="onMonthTap"
+            hover-class="tr-hover"
+            hover-stay-time="60"
+          >
+            <text class="td td-month">{{item.label}}</text>
+            <text class="td td-num {{item.empty ? 'td-zero' : ''}}">{{item.expenseText}}</text>
+            <text class="td td-num {{item.empty ? 'td-zero' : ''}}">{{item.incomeText}}</text>
+            <text class="td td-num {{item.balanceClass}}">{{item.balanceText}}</text>
+            <text class="td td-arrow">›</text>
+          </view>
+
+          <view wx:if="{{rows.length === 0}}" class="table-empty">
+            <text class="table-empty-text">这一年还没有记录</text>
+          </view>
+        </view>
+
+        <text class="table-tip">点某个月可以跳到那个月的统计。今年只列到当前月份。</text>
+
+        <view class="bottom-space"></view>
+      </scroll-view>
+    </view>
+  </view>
+</view>

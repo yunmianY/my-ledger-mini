@@ -1,0 +1,24 @@
+<view class="lc">
+  <view class="lc-plot" style="width: {{width}}rpx; height: {{height}}rpx;">
+    <view
+      wx:for="{{segments}}"
+      wx:key="key"
+      class="lc-seg"
+      style="left: {{item.x}}rpx; top: {{item.y}}rpx; width: {{item.len}}rpx; transform: rotate({{item.angle}}deg); background: {{stroke}};"
+    ></view>
+    <view
+      wx:for="{{points}}"
+      wx:key="month"
+      class="lc-dot {{item.active ? 'lc-dot-on' : ''}}"
+      style="left: {{item.x}}rpx; top: {{item.y}}rpx; background: {{stroke}};"
+    ></view>
+  </view>
+
+  <view class="lc-labels" style="width: {{width}}rpx;">
+    <text
+      wx:for="{{points}}"
+      wx:key="month"
+      class="lc-label {{item.active ? 'lc-label-on' : ''}}"
+    >{{item.label}}</text>
+  </view>
+</view>

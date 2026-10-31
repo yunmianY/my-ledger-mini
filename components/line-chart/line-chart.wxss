@@ -1,0 +1,53 @@
+.lc {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 8rpx;
+}
+
+.lc-plot {
+  position: relative;
+}
+
+.lc-seg {
+  position: absolute;
+  height: 2rpx;
+  transform-origin: 0 50%;
+  border-radius: 2rpx;
+}
+
+.lc-dot {
+  position: absolute;
+  width: 10rpx;
+  height: 10rpx;
+  margin-left: -5rpx;
+  margin-top: -5rpx;
+  border-radius: 50%;
+  opacity: 0.55;
+}
+
+.lc-dot-on {
+  width: 16rpx;
+  height: 16rpx;
+  margin-left: -8rpx;
+  margin-top: -8rpx;
+  opacity: 1;
+}
+
+.lc-labels {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10rpx;
+}
+
+.lc-label {
+  flex: 1;
+  text-align: center;
+  font-size: 18rpx;
+  color: #b0b0b0;
+}
+
+.lc-label-on {
+  color: #e4572e;
+  font-weight: 600;
+}

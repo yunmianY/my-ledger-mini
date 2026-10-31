@@ -1,0 +1,57 @@
+<view class="tp">
+  <view class="tp-preview">
+    <text class="tp-preview-label">已选时刻</text>
+    <text class="tp-preview-value">{{hour}}:{{minute}}</text>
+  </view>
+
+  <view class="tp-presets">
+    <view
+      wx:for="{{presets}}"
+      wx:key="key"
+      class="tp-preset"
+      data-key="{{item.key}}"
+      bindtap="onPreset"
+      hover-class="tp-hover"
+      hover-stay-time="60"
+    >
+      <text class="tp-preset-text">{{item.label}}</text>
+    </view>
+  </view>
+
+  <text class="tp-label">小时</text>
+  <view class="tp-grid tp-grid-hour">
+    <view
+      wx:for="{{hours}}"
+      wx:key="*this"
+      class="tp-cell {{item === hour ? 'tp-on' : ''}}"
+      data-unit="hour"
+      data-v="{{item}}"
+      bindtap="onPick"
+    >
+      <text class="tp-cell-text {{item === hour ? 'tp-cell-text-on' : ''}}">{{item}}</text>
+    </view>
+  </view>
+
+  <text class="tp-label">分钟</text>
+  <view class="tp-grid tp-grid-minute">
+    <view
+      wx:for="{{minutes}}"
+      wx:key="*this"
+      class="tp-cell tp-cell-minute {{item === minute ? 'tp-on' : ''}}"
+      data-unit="minute"
+      data-v="{{item}}"
+      bindtap="onPick"
+    >
+      <text class="tp-cell-text {{item === minute ? 'tp-cell-text-on' : ''}}">{{item}}</text>
+    </view>
+  </view>
+
+  <view class="tp-actions">
+    <view class="tp-btn tp-btn-ghost" bindtap="onCancel" hover-class="tp-hover">
+      <text class="tp-btn-text">取消</text>
+    </view>
+    <view class="tp-btn tp-btn-primary tp-btn-last" bindtap="onConfirm" hover-class="tp-hover">
+      <text class="tp-btn-text tp-btn-text-light">确定</text>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,71 @@
+/*
+ * 关键：用 fixed + 100vw/100vh 而不是 absolute。
+ * 组件节点在 Skyline 下会成为定位参照物，absolute 会被摆到组件所在位置（页面底部、屏幕外）。
+ * fixed 相对视口，不受组件边界影响。
+ */
+.sheet-root {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background: rgba(0, 0, 0, 0.42);
+}
+
+.sheet-panel {
+  width: 100%;
+  background: #ffffff;
+  border-radius: 32rpx 32rpx 0 0;
+  padding-bottom: env(safe-area-inset-bottom);
+  animation: sheet-in 0.2s ease-out;
+}
+
+@keyframes sheet-in {
+  from {
+    transform: translateY(60rpx);
+    opacity: 0.4;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.sheet-head {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 32rpx 32rpx 8rpx;
+}
+
+.sheet-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.sheet-close {
+  width: 56rpx;
+  height: 56rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sheet-close-hover {
+  opacity: 0.5;
+}
+
+.sheet-close-icon {
+  font-size: 28rpx;
+  color: #8a8a8a;
+}
+
+.sheet-body {
+  padding: 8rpx 32rpx 24rpx;
+}
